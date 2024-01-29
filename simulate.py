@@ -1,16 +1,24 @@
 import pybullet as p
-import pyrosim.pyrosim as pyrosim
+import pybullet_data
 import time
 
 
 
 physicsClient = p.connect(p.GUI)
+p.setAdditionalSearchPath(pybullet_data.getDataPath())
 
+
+
+p.setGravity(0,0,-9.8)
+
+
+
+planeId = p.loadURDF("plane.urdf")
 p.loadSDF("box.sdf")
 
 
+
 for i in range(0, 100000):
-    time.sleep(0.0066)
     p.stepSimulation()
 
 p.disconnect()
