@@ -40,7 +40,7 @@ for i in range(0, 100000):
 
     controlMode = p.POSITION_CONTROL,
 
-    targetPosition = -3.1415926 / 4.0,
+    targetPosition = 3.1415926 / 4.0,
 
     maxForce = 500)
 
