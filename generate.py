@@ -1,27 +1,29 @@
 import pyrosim.pyrosim as pyrosim
 
-pyrosim.Start_SDF("box.sdf")
+def main():
+    Create_World()
+    Create_Robot()
+
+def Create_World():
+    pyrosim.Start_SDF("world.sdf")
+    pyrosim.Send_Cube(name= f"Box 1", pos=[5, 5, 1] , size=[1,1,1])
+    pyrosim.End()
+
+def Create_Robot():
+    pyrosim.Start_URDF("body.urdf")
+    
+    pyrosim.Send_Cube(name= f"Torso", pos=[1.5, 1.5, 1.5] , size=[1,1,1])
+    pyrosim.Send_Joint(name = "Torso_BackLeg" , parent= "Torso" , child = "BackLeg" , type = "revolute", position = [1, 1.5, 1])
+    pyrosim.Send_Cube(name= f"BackLeg", pos=[-0.5, 0, -0.5] , size=[1,1,1])
+
+    pyrosim.Send_Joint(name = "Torso_FrontLeg" , parent= "Torso" , child = "Frontleg" , type = "revolute", position = [2, 1.5, 1])
+    pyrosim.Send_Cube(name= f"Frontleg", pos=[0.5, 0, -0.5] , size=[1,1,1])
 
 
-total = 5
-for h in range(0, total):
-    for j in range(0,total): 
-        length = 1
-        width = 1
-        height = 1
-        x = h
-        y = 0.5
-        z = j
-
-        xzy_matrix = [x,z,y]
-        lengths = [length, width, height]
-        size = 0.9
-        for i in range(0, 10):
-            pyrosim.Send_Cube(name= f"Box {i}", pos=[xzy_matrix[0],xzy_matrix[1],xzy_matrix[2] + 1] , size=[size * lengths[0], size * lengths[1],size * lengths[2]])
-            xzy_matrix = [xzy_matrix[0],xzy_matrix[1], xzy_matrix[2] + 1]
-            lengths = [lengths[0] * 0.9, lengths[1] * 0.9, lengths[2] * 0.9]
 
 
-pyrosim.End()
+    pyrosim.End()
 
 
+
+main()
