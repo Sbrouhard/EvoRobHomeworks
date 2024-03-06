@@ -2,14 +2,15 @@ import pyrosim.pyrosim as pyrosim
 
 def main():
     Create_World()
-    Create_Robot()
+    Create_Body()
+    Create_Brain()
 
 def Create_World():
     pyrosim.Start_SDF("world.sdf")
     pyrosim.Send_Cube(name= f"Box 1", pos=[5, 5, 1] , size=[1,1,1])
     pyrosim.End()
 
-def Create_Robot():
+def Create_Body():
     pyrosim.Start_URDF("body.urdf")
     
     pyrosim.Send_Cube(name= f"Torso", pos=[1.5, 1.5, 1.5] , size=[1,1,1])
@@ -23,6 +24,22 @@ def Create_Robot():
 
 
     pyrosim.End()
+
+def Create_Brain():
+    pyrosim.Start_NeuralNetwork("brain.nndf")
+
+    pyrosim.Send_Sensor_Neuron(name = 0 , linkName = "Torso")
+    pyrosim.Send_Sensor_Neuron(name = 1 , linkName = "FrontLeg")
+    pyrosim.Send_Sensor_Neuron(name = 2 , linkName = "BackLeg")
+
+    pyrosim.Send_Motor_Neuron( name = 3 , jointName = "Torso_BackLeg")
+    pyrosim.Send_Motor_Neuron( name = 4 , jointName = "Torso_FrontLeg")
+
+
+
+    pyrosim.End()
+
+
 
 
 
