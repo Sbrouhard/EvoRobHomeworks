@@ -9,7 +9,13 @@ class SENSOR:
 
     def Get_Value(self, timeStep):
         try:
-            self.values[timeStep] = pyrosim.Get_Touch_Sensor_Value_For_Link(self.linkName)
+            value = pyrosim.Get_Touch_Sensor_Value_For_Link(self.linkName)
+            if value == -1:
+                value = 0
+            
+            print(value)
+            
+            self.values[timeStep] = value
         except:
             pass
         if timeStep == c.simulationSteps - 1:

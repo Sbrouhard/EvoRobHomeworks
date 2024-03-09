@@ -21,6 +21,9 @@ class MOTOR:
             targetPosition =  desired_angle,
             maxForce = 300)
         
+    def Get_Joint_Name(self):
+        return self.jointName
+        
            
     
     
