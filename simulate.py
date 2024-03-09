@@ -10,6 +10,5 @@ import os
 
 
 
-os.system("python3 generate.py")
 simulation = SIMULATION()
 simulation.Run()

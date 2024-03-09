@@ -3,7 +3,7 @@ import numpy as np
 
 gravity = -9.8
 
-simulationSteps = 100000
+simulationSteps = 1000
 
 
 FrontLegAmplitude = np.pi/4
