@@ -3,6 +3,7 @@ import pyrosim.pyrosim as pyrosim
 from sensor import SENSOR
 from motor import MOTOR
 from pyrosim.neuralNetwork import NEURAL_NETWORK
+import numpy as np
 
 class ROBOT:
     
@@ -10,6 +11,8 @@ class ROBOT:
         # Creating Empty Dictionaries for sensors and motors
         self.sensors = {}
         self.motors = {}
+
+        self.zcoords = []
 
         # Loading body of the robot and loading pyrosim data
         self.robotId = p.loadURDF("body.urdf")
@@ -48,7 +51,19 @@ class ROBOT:
                             motor.SetValue(self.robotId, desired_angle)
     def Think(self):
         self.nn.Update()
-        self.nn.Print()
+        stateOfLinkZero = p.getLinkState(self.robotId,0)
+
+    def Get_Fitness(self):
+        stateOfLinkZero = p.getLinkState(self.robotId,0)
+        positionOfLinkZero =  stateOfLinkZero[0]
+        xCoordOfLinkZero = positionOfLinkZero[0]
+
+        fitness = xCoordOfLinkZero
+        
+        f = open("fitness.txt", "w")
+        f.write(str(xCoordOfLinkZero))
+        f.close()
+
 
 
 

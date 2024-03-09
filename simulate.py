@@ -7,8 +7,8 @@ import random
 import constants as c
 from simulation import SIMULATION
 import os
+import sys
 
-
-
-simulation = SIMULATION()
-simulation.Run()
+directOrGUI = sys.argv[1]
+simulation = SIMULATION(directOrGUI)
+simulation.Run(directOrGUI)

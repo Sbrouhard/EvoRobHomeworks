@@ -13,11 +13,8 @@ class SENSOR:
             if value == -1:
                 value = 0
             
-            print(value)
             
             self.values[timeStep] = value
         except:
             pass
-        if timeStep == c.simulationSteps - 1:
-            print(self.values)
     
