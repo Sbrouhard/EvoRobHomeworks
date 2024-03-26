@@ -3,7 +3,7 @@ import numpy as np
 
 gravity = -9.8
 
-simulationSteps = 500
+simulationSteps = 1000
 
 
-numberOfGenerations = 200
+numberOfGenerations = 400

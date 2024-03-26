@@ -53,15 +53,29 @@ class ROBOT:
         self.nn.Update()
         stateOfLinkZero = p.getLinkState(self.robotId,0)
 
+        stateOfLinkZero = p.getLinkState(self.robotId,0)
+        positionOfLinkZero =  stateOfLinkZero[0]
+        zCoordOfLinkZero = positionOfLinkZero[2]
+        self.zcoords.append(zCoordOfLinkZero)
+
     def Get_Fitness(self):
         stateOfLinkZero = p.getLinkState(self.robotId,0)
         positionOfLinkZero =  stateOfLinkZero[0]
         xCoordOfLinkZero = positionOfLinkZero[0]
+        yCoordOfLinkZero = positionOfLinkZero[1]
 
-        fitness = xCoordOfLinkZero
+        stateOfLinkOne = p.getLinkState(self.robotId,1)
+        positionOfLinkOne =  stateOfLinkOne[2] 
+
+        upsideDownOffset = 0
+        if positionOfLinkZero[2] -  positionOfLinkOne[2] <= 0:
+            upsideDownOffset = -1000
+
+        print(f' MAX COORD {np.max(self.zcoords)}')
+        fitness = xCoordOfLinkZero**2 - (np.max(self.zcoords) ** 2) - yCoordOfLinkZero - upsideDownOffset
         
         f = open("fitness.txt", "w")
-        f.write(str(xCoordOfLinkZero))
+        f.write(str(fitness))
         f.close()
 
 
